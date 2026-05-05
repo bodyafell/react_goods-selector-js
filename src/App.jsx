@@ -16,34 +16,33 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedIdx, setSelectedIdx] = useState(8);
+  const [selectedGood, setselectedGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title">
-        {selectedIdx !== null
-          ? `${goods[selectedIdx]} is selected`
+        {selectedGood !== ''
+          ? `${selectedGood} is selected`
           : 'No goods selected'}
 
-        {selectedIdx !== null && (
+        {selectedGood !== '' && (
           <button
-            type='button'
+            type="button"
             data-cy="ClearButton"
             className="delete ml-3"
-            onClick={() => setSelectedIdx(null)}
+            onClick={() => setselectedGood('')}
           />
         )}
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map((good, idx) => {
-            const isCurrentSelected = selectedIdx === idx;
+          {goods.map((good) => {
+            const isCurrentSelected = selectedGood === good;
 
             return (
               <tr
                 data-cy="Good"
-                
                 className={
                   isCurrentSelected ? 'has-background-success-light' : ''
                 }
@@ -54,7 +53,7 @@ export const App = () => {
                     className={`button ${isCurrentSelected ? 'is-info' : ''}`}
                     data-cy={`${isCurrentSelected ? 'RemoveButton' : 'AddButton'}`}
                     onClick={() => {
-                      setSelectedIdx(isCurrentSelected ? null : idx);
+                      setselectedGood(isCurrentSelected ? '' : good);
                     }}
                   >
                     {isCurrentSelected ? '-' : '+'}
