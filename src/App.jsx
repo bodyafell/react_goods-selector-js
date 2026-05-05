@@ -37,27 +37,28 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((good) => {
+          {goods.map(good => {
             const isCurrentSelected = selectedGood === good;
-
+            const isSomethingSelected = selectedGood !== '';
             return (
               <tr
+                key = {good}
                 data-cy="Good"
                 className={
                   isCurrentSelected ? 'has-background-success-light' : ''
                 }
               >
                 <td>
+                  {(isCurrentSelected || !isSomethingSelected) && (
                   <button
                     type="button"
                     className={`button ${isCurrentSelected ? 'is-info' : ''}`}
-                    data-cy={`${isCurrentSelected ? 'RemoveButton' : 'AddButton'}`}
-                    onClick={() => {
-                      setselectedGood(isCurrentSelected ? '' : good);
-                    }}
+                    data-cy={isCurrentSelected ? "RemoveButton" : "AddButton"}
+                    onClick={() => setselectedGood(isCurrentSelected ? '' : good)}
                   >
                     {isCurrentSelected ? '-' : '+'}
                   </button>
+                  )}
                 </td>
                 <td className="is-vcentered" data-cy="GoodTitle">
                   {good}
